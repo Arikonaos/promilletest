@@ -34,13 +34,32 @@
     }
     input {
       margin-top: 0.5rem;
-      width: 100%;
+      width: 80%;
       padding: 0.6rem;
       font-size: 1rem;
       border-radius: 0.6rem;
       border: 1px solid #ccc;
+      text-align: center;
     }
-    button {
+    .number-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .number-controls button {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 0.6rem;
+      border: 1px solid #888;
+      background: #ff8c42;
+      color: white;
+      cursor: pointer;
+    }
+    .number-controls button:active {
+      background: #ff7722;
+    }
+    button.main-button {
       margin-top: 1.5rem;
       padding: 0.8rem 1.2rem;
       font-size: 1rem;
@@ -51,7 +70,7 @@
       cursor: pointer;
       width: 100%;
     }
-    button:hover {
+    button.main-button:active {
       background: #ff7722;
     }
     .result {
@@ -65,15 +84,19 @@
 </head>
 <body>
   <div class="card">
-    <h1>🍺 FCV Just-Men Promilletest</h1>
+    <h1>🍺 Ehrlicher Promilletest</h1>
 
     <label for="bier">Wie viele Bier hattest du?</label>
-    <input id="bier" type="number" min="0" max="20" value="0" step="1" />
+    <div class="number-controls">
+      <button onclick="changeBier(-1)">-</button>
+      <input id="bier" type="number" min="0" max="20" value="0" readonly />
+      <button onclick="changeBier(1)">+</button>
+    </div>
 
     <label for="fastnacht">Kannst du noch „Fastnacht“ richtig schreiben?</label>
     <input id="fastnacht" type="text" placeholder="Hier eintippen" />
 
-    <button onclick="auswerten()">Test auswerten</button>
+    <button class="main-button" onclick="auswerten()">Test auswerten</button>
 
     <div id="result" class="result"></div>
     <audio id="prostSound" src="https://www.soundjay.com/human/sounds/cheering-01.mp3" preload="auto"></audio>
@@ -81,6 +104,15 @@
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
+    function changeBier(amount) {
+      const bierInput = document.getElementById('bier');
+      let current = parseInt(bierInput.value, 10);
+      current += amount;
+      if (current < 0) current = 0;
+      if (current > 20) current = 20;
+      bierInput.value = current;
+    }
+
     function auswerten() {
       const bier = parseInt(document.getElementById('bier').value, 10);
       const wort = document.getElementById('fastnacht').value.trim();
