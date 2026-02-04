@@ -59,16 +59,16 @@
       font-size: 1.2rem;
       font-weight: bold;
       display: none;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <audio id="prostSound" src="https://www.soundjay.com/human/sounds/cheering-01.mp3" preload="auto"></audio>
-    <h1>🍺 Ehrlicher Promilletest</h1>
+    <h1>🍺 FCV Just-Men Promilletest</h1>
 
     <label for="bier">Wie viele Bier hattest du?</label>
-    <input id="bier" type="number" min="0" placeholder="Gib die Anzahl deiner Biere an" />
+    <input id="bier" type="number" min="0" max="20" value="0" step="1" />
 
     <label for="fastnacht">Kannst du noch „Fastnacht“ richtig schreiben?</label>
     <input id="fastnacht" type="text" placeholder="Hier eintippen" />
@@ -76,9 +76,10 @@
     <button onclick="auswerten()">Test auswerten</button>
 
     <div id="result" class="result"></div>
-    
+    <audio id="prostSound" src="https://www.soundjay.com/human/sounds/cheering-01.mp3" preload="auto"></audio>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     function auswerten() {
       const bier = parseInt(document.getElementById('bier').value, 10);
@@ -113,18 +114,13 @@
       }
 
       const result = document.getElementById('result');
-      result.textContent = spruch + rechtschreibung;
+      result.textContent = spruch + "\n" + rechtschreibung;
       result.style.display = 'block';
 
       if (bier === 5 || bier === 10 || bier >= 15) {
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
       }
     }
-
-      const result = document.getElementById('result');
-      result.textContent = spruch;
-      result.style.display = 'block';
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
