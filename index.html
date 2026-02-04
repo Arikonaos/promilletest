@@ -115,7 +115,8 @@
 
     function auswerten() {
       const bier = parseInt(document.getElementById('bier').value, 10);
-      const wort = document.getElementById('fastnacht').value.trim();
+      const wortInput = document.getElementById('fastnacht');
+      const wort = wortInput.value.trim();
       let spruch = "🥳 Ergebnis: Feierabend ist noch lange nicht.";
 
       if (!isNaN(bier)) {
@@ -141,7 +142,7 @@
         else if (bier === 17) spruch = "🕜 It's Beer o'clock. Eins geht noch!";
         else if (bier === 18) spruch = "❤ Zwischen Leber und Nierchen passt immer ein Bierchen";
         else if (bier === 19) spruch = "😁 Prost ! Auf die schönen Dinge im Leben: Liebe, Lachen und ein kaltes Bier!";
-        else if (bier === 20) spruch = "👑 Respekt du bist ein wahrer Kampftrinker. Schon mal über eine Karierre als Elferrat nachgedacht?😉"
+        else if (bier === 20) spruch = "👑 Respekt du bist ein wahrer Kampftrinker. Schon mal über eine Karierre als Elferrat nachgedacht?😉";
       }
 
       let rechtschreibung = "";
@@ -154,6 +155,9 @@
       const result = document.getElementById('result');
       result.textContent = spruch + "\n" + rechtschreibung;
       result.style.display = 'block';
+
+      // Fastnacht-Feld nach Auswertung zurücksetzen
+      wortInput.value = '';
 
       if (bier === 5 || bier === 10 || bier >= 15) {
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
