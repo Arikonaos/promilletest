@@ -117,6 +117,15 @@
       const bier = parseInt(document.getElementById('bier').value, 10);
       const wortInput = document.getElementById('fastnacht');
       const wort = wortInput.value.trim();
+      const result = document.getElementById('result');
+
+      // Prüfen, ob Fastnacht ausgefüllt ist
+      if (wort === "") {
+        result.textContent = "⚠️ Bitte schreibe das Wort, damit wir deine Promilleanzahl ermitteln können!";
+        result.style.display = 'block';
+        return;
+      }
+
       let spruch = "🥳 Ergebnis: Feierabend ist noch lange nicht.";
 
       if (!isNaN(bier)) {
@@ -148,11 +157,10 @@
       let rechtschreibung = "";
       if (wort.toLowerCase() === "fastnacht") {
         rechtschreibung = "\n\n✅ Korrekt geschrieben. Test bestanden. Ich sehe du hast noch Durst!";
-      } else if (wort.length > 0) {
+      } else {
         rechtschreibung = "\n\n❌ Hast du dich vertippt? Bestell dir lieber mal ein Bier und probier es dann noch einmal!";
       }
 
-      const result = document.getElementById('result');
       result.textContent = spruch + "\n" + rechtschreibung;
       result.style.display = 'block';
 
