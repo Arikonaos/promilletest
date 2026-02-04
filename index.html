@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ehrlicher Promilletest</title>
   <style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ffcc70, #ff8c42);
@@ -74,19 +75,24 @@
 
     <button onclick="auswerten()">Test auswerten</button>
 
-    <div id="result" class="result">🥳 Ergebnis: Feierabend ist noch lange nicht.</div>
+    <div id="result" class="result"></div>
+    <audio id="prostSound" src="https://www.soundjay.com/human/sounds/cheering-01.mp3" preload="auto"></audio>
   </div>
 
   <script>
     function auswerten() {
       const bier = parseInt(document.getElementById('bier').value, 10);
+      const wort = document.getElementById('fastnacht').value.trim();
       let spruch = "🥳 Ergebnis: Feierabend ist noch lange nicht.";
 
       if (!isNaN(bier)) {
+        document.getElementById('prostSound').currentTime = 0;
+        document.getElementById('prostSound').play();
+
         if (bier <= 2) spruch = "🍺 Schwacher Zieher. Bist du der Fahrer? Auf jetzt.";
         else if (bier === 3) spruch = "💧 Save water – Drink Beer.";
         else if (bier === 4) spruch = "🤝 Dein rechter Sitznachbar bezahlt dir das nächste Bier. Ihr seid für heute Bierbrüder.";
-        else if (bier === 5) spruch = "😋 Prost. Schmecke lasse. Noch eins bis zum halben Dutzend.";
+        else if (bier === 5) spruch = "😋 Prost. Schmecke lasse. Noch eins bis zum halben Dutzend";
         else if (bier === 6) spruch = "🥃 Halbes Dutzend geschafft. Das sollte man mit einem Schnaps feiern.";
         else if (bier === 7) spruch = "📢 Aus dem Keller tönt ein lauter Schrei: Schieb nei, schieb nei!";
         else if (bier === 8) spruch = "🎺 Ein Prooooooosit!";
@@ -98,6 +104,22 @@
         else if (bier === 14) spruch = "🎶 Wir singen: Baila, baila, baila, baila – Bailu, bailu, bailué.";
         else if (bier >= 15) spruch = "📏 Mit des Bieres Hochgenuss, wächst des Bauches Radius!";
       }
+
+      let rechtschreibung = "";
+      if (wort.toLowerCase() === "fastnacht") {
+        rechtschreibung = "\n\n✅ Korrekt geschrieben. Test bestanden. Ich sehe du hast noch Durst!";
+      } else if (wort.length > 0) {
+        rechtschreibung = "\n\n❌ Hast du dich vertippt? Bestell dir lieber mal ein Bier und probier es dann noch einmal!";
+      }
+
+      const result = document.getElementById('result');
+      result.textContent = spruch + rechtschreibung;
+      result.style.display = 'block';
+
+      if (bier === 5 || bier === 10 || bier >= 15) {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+      }
+    }
 
       const result = document.getElementById('result');
       result.textContent = spruch;
