@@ -84,7 +84,7 @@
 </head>
 <body>
   <div class="card">
-    <h1>🍺 Ehrlicher Promilletest</h1>
+    <h1>🍺 FCV-Just-Men Promilletest</h1>
 
     <label for="bier">Wie viele Bier hattest du?</label>
     <div class="number-controls">
@@ -122,7 +122,8 @@
         document.getElementById('prostSound').currentTime = 0;
         document.getElementById('prostSound').play();
 
-        if (bier <= 2) spruch = "🍺 Schwacher Zieher. Bist du der Fahrer? Auf jetzt.";
+        if (bier == 1) spruch = "🍺 Schwacher Zieher. Du bist doch wohl nicht der Fahrer? Auf jetzt.";
+        else if (bier === 2) spruch = "🤙🏻 Ein Bier noch so klein, bleibt ungern allein.";
         else if (bier === 3) spruch = "💧 Save water – Drink Beer.";
         else if (bier === 4) spruch = "🤝 Dein rechter Sitznachbar bezahlt dir das nächste Bier. Ihr seid für heute Bierbrüder.";
         else if (bier === 5) spruch = "😋 Prost. Schmecke lasse. Noch eins bis zum halben Dutzend";
