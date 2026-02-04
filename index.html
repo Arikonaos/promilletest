@@ -69,7 +69,7 @@
     <label for="bier">Wie viele Bier hattest du?</label>
     <input id="bier" type="number" min="0" placeholder="Nur grob schätzen…" />
 
-    <label for="fastnacht">Kannst du noch „Fassenacht“ richtig schreiben?</label>
+    <label for="fastnacht">Kannst du noch „Fastnacht“ richtig schreiben?</label>
     <input id="fastnacht" type="text" placeholder="Hier eintippen" />
 
     <button onclick="auswerten()">Test auswerten</button>
@@ -79,7 +79,29 @@
 
   <script>
     function auswerten() {
-      document.getElementById('result').style.display = 'block';
+      const bier = parseInt(document.getElementById('bier').value, 10);
+      let spruch = "🥳 Ergebnis: Feierabend ist noch lange nicht.";
+
+      if (!isNaN(bier)) {
+        if (bier <= 2) spruch = "🍺 Schwacher Zieher. Bist du der Fahrer? Auf jetzt.";
+        else if (bier === 3) spruch = "💧 Save water – Drink Beer.";
+        else if (bier === 4) spruch = "🤝 Dein rechter Sitznachbar bezahlt dir das nächste Bier. Ihr seid für heute Bierbrüder.";
+        else if (bier === 5) spruch = "😋 Prost. Schmecke lasse. Noch eins bis zum halben Dutzend.";
+        else if (bier === 6) spruch = "🥃 Halbes Dutzend geschafft. Das sollte man mit einem Schnaps feiern.";
+        else if (bier === 7) spruch = "📢 Aus dem Keller tönt ein lauter Schrei: Schieb nei, schieb nei!";
+        else if (bier === 8) spruch = "🎺 Ein Prooooooosit!";
+        else if (bier === 9) spruch = "🌾 Hopfen und Malz – Ab in den Hals.";
+        else if (bier === 10) spruch = "👑 Zweistellig: Das schreit nach dem Trinkspruch unserer Royal Eleven: Zieh mal Hülsen, Hülsen Früchte, Hülsen Früchte. Uuuuuuuuumsonst!";
+        else if (bier === 11) spruch = "🏃 Wenn eins heute läuft, dann das Bier. Sportlicher wird es nicht mehr!";
+        else if (bier === 12) spruch = "🍻 Lass dich nicht lumpen, hoch die Humpen!";
+        else if (bier === 13) spruch = "🙏 Jeder muss an etwas glauben und ich glaub du trinkst noch was.";
+        else if (bier === 14) spruch = "🎶 Wir singen: Baila, baila, baila, baila – Bailu, bailu, bailué.";
+        else if (bier >= 15) spruch = "📏 Mit des Bieres Hochgenuss, wächst des Bauches Radius!";
+      }
+
+      const result = document.getElementById('result');
+      result.textContent = spruch;
+      result.style.display = 'block';
     }
   </script>
 </body>
